@@ -1,15 +1,15 @@
 import bearded from "./images/bearded.png";
 import blonde from "./images/blonde.png";
 import budahJesus from "./images/budahJesus.png";
-import cowboy from  "./iamges/cowboy.png";
+import cowboy from  "./images/cowboy.png";
 import dog from "./images/dog.png";
 import elephant from "./images/elephant.png";
 import greenDude from "./images/greenDude.png";
-import roarschach from "./images/roarschach.png";
+import rorschach from "./images/rorschach.png";
 import sunglasses from "./images/sunglasses.png";
 
 const characters = [
-    {name: "Roarschach", image: roarschach},
+    {name: "Roarschach", image: rorschach},
     {name: "Sunglass Man", image: sunglasses},
     {name: "Greeeny", image: greenDude},
     {name: "Elephant", image: elephant},
