@@ -1,0 +1,44 @@
+@font-face {
+    font-family: "special-elite";
+    src: url(./fonts/Righteous-Regular.ttf);
+}
+
+html{ 
+    background: rgb(62, 0, 21);
+}
+
+.navbar {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    padding: 2.5vh 0vh;
+    font-family: "special-elite";
+    color: white;
+    background-color: rgb(30, 0, 10);
+}
+
+.navbar > h1 {
+    font-size: 3rem;
+}
+
+.navbar > p {
+    font-size: 1.25rem;
+}
+
+.homepage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(62, 0, 21);
+    padding: 3rem 0;
+}
+
+.gridContainer { 
+    margin: 0 5vw ;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 5vw;
+}
+
