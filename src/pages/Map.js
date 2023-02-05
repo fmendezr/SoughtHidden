@@ -16,7 +16,7 @@ const Map = props => {
             </Link>
                 {map.characters.map((character) => {
                     return (
-                        <div>
+                        <div key={character.name}>
                             <Character src={character.image} />
                             <p>{character.name}</p>
                         </div>
