@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const MapPreview = props => {
     return (
-        <Link to="/" style={{color: "black", textDecoration: "none"}}>
+        <Link to={`/${props.id}`} style={{color: "black", textDecoration: "none"}}>
             <Container>
                 <MapName>{props.name}</MapName>
                 <Image src={props.image} alt={props.name}/>

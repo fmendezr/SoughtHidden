@@ -14,6 +14,7 @@ const Home = () => {
                         <MapPreview 
                             name={map.name}
                             image={map.image}
+                            id={map.id}
                             key={map.id}
                         />
                     )
