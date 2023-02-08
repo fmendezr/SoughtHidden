@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import styled from "styled-components";
 import maps from "../maps";
@@ -7,6 +8,35 @@ const Map = props => {
 
     const { id } = useParams();
     const map = maps.find((map) => map.id === id);
+    
+    const [foundCharacters, setFoundCharacters] = useState({0: false, 1: false, 2:  false});
+    const [chractersMissing, setCharactersMissing] = useState(3);
+    const [gameOver, setGameOver] = useState(false)
+
+    const reduceCharactersMissing = () => {
+        setCharactersMissing((previousState) => {
+            return previousState - 1;
+        })
+    }
+
+    const changeFoundCharacter = id => {
+        setFoundCharacters((previousState) => {
+           return {...previousState, [id]: true}
+        });
+    };
+
+    const checkGameOver = () => {
+        for (id in foundCharacters){
+            if (foundCharacters[id] == false) return false;
+        }
+        return true;
+    };
+
+    const handleGameOver = () => {
+        if (checkGameOver){
+            setGameOver(true);
+        } 
+    };
 
     return (
         <>

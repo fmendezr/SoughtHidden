@@ -9,15 +9,15 @@ import rorschach from "./images/rorschach.png";
 import sunglasses from "./images/sunglasses.png";
 
 const characters = [
-    {name: "Roarschach", image: rorschach},
-    {name: "Sunglass Man", image: sunglasses},
-    {name: "Greeeny", image: greenDude},
-    {name: "Elephant", image: elephant},
-    {name: "Buddah Jesus", image: budahJesus},
-    {name: "Dog", image: dog},
-    {name: "Cowboy", image: cowboy },
-    {name: "Blonde", image: blonde},
-    {name: "Bearded", image: bearded},
+    {id: 0, name: "Roarschach", image: rorschach},
+    {id: 1, name: "Sunglass Man", image: sunglasses},
+    {id: 2, name: "Greeeny", image: greenDude},
+    {id: 0, name: "Elephant", image: elephant},
+    {id: 1, name: "Buddah Jesus", image: budahJesus},
+    {id: 2, name: "Dog", image: dog},
+    {id: 0, name: "Cowboy", image: cowboy },
+    {id: 1, name: "Blonde", image: blonde},
+    {id: 2, name: "Bearded", image: bearded},
 ]
 
 export default characters;
