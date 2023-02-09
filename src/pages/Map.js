@@ -5,6 +5,7 @@ import maps from "../maps";
 import homeIcon from "../images/homeIcon.svg";
 import CharacterDropdown from "../components/CharacterDropdown";
 import Counter from "../components/Counter";
+import Crosshair from "../components/Crosshair";
 
 const Map = props => {
 
@@ -70,6 +71,7 @@ const Map = props => {
                 <div className="gameContainer">
                     <Image src={map.image}/>
                 </div>
+                <Crosshair></Crosshair>
             </main>
         </>
     )
