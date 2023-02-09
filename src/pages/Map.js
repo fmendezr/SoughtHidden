@@ -4,6 +4,7 @@ import styled from "styled-components";
 import maps from "../maps";
 import homeIcon from "../images/homeIcon.svg";
 import CharacterDropdown from "../components/CharacterDropdown";
+import Counter from "../components/Counter";
 
 const Map = props => {
 
@@ -15,6 +16,15 @@ const Map = props => {
     const [foundCharacters, setFoundCharacters] = useState({0: false, 1: false, 2:  false});
     const [charactersMissing, setCharactersMissing] = useState(3);
     const [gameOver, setGameOver] = useState(false)
+    const [time, setTime] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime((prevTime) => prevTime + 1);
+        }, 1000);
+        return () => clearInterval(interval);
+    })
+
 
     const reduceCharactersMissing = () => {
         setCharactersMissing((previousState) => {
@@ -44,14 +54,17 @@ const Map = props => {
     return (
         <>
             <div className="navbar">
-            <Link to="/">
-                <Logo src={homeIcon}/>
-            </Link>
-            <CharacterDropdown 
-                num={charactersMissing}
-                characters={characterData}
-                foundCharacters={foundCharacters}
-            />
+                <Link to="/">
+                    <Logo src={homeIcon}/>
+                </Link>
+                <Counter
+                        time={time}
+                />
+                <CharacterDropdown 
+                    num={charactersMissing}
+                    characters={characterData}
+                    foundCharacters={foundCharacters}
+                />
             </div>
             <main>
                 <div className="gameContainer">
