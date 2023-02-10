@@ -18,6 +18,8 @@ const Map = props => {
     const [charactersMissing, setCharactersMissing] = useState(3);
     const [gameOver, setGameOver] = useState(false)
     const [time, setTime] = useState(0);
+    const [xCoord, setXCoord] = useState(0);
+    const [yCoord, setYCoord] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -26,6 +28,13 @@ const Map = props => {
         return () => clearInterval(interval);
     })
 
+    const updateCoords = (e) => {
+        const container = e.target;
+        let rect  = container.getBoundingClientRect();
+        setXCoord(Math.floor((e.clientX - rect.top) * 100 / container.offsetWidth));
+        setYCoord(Math.floor((e.clientY - rect.top) * 100 / container.offsetWidth));
+      
+    }
 
     const reduceCharactersMissing = () => {
         setCharactersMissing((previousState) => {
@@ -68,10 +77,12 @@ const Map = props => {
                 />
             </div>
             <main>
-                <div className="gameContainer">
+                <div className="gameContainer" onClick={updateCoords}>
                     <Image src={map.image}/>
                 </div>
-                <Crosshair></Crosshair>
+            
+                <p>{xCoord}</p>
+                <p>{yCoord}</p>
             </main>
         </>
     )
