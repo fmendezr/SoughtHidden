@@ -6,6 +6,7 @@ import homeIcon from "../images/homeIcon.svg";
 import CharacterDropdown from "../components/CharacterDropdown";
 import Counter from "../components/Counter";
 import Crosshair from "../components/Crosshair";
+import ChooseCharacter from "../components/ChooseCharacter";
 
 const Map = props => {
 
@@ -14,7 +15,7 @@ const Map = props => {
 
     const characterData = map.characters;
     
-    const [foundCharacters, setFoundCharacters] = useState({0: false, 1: false, 2:  false});
+    const [foundCharacters, setFoundCharacters] = useState({0: false, 1: false, 2: false});
     const [charactersMissing, setCharactersMissing] = useState(3);
     const [gameOver, setGameOver] = useState(false)
     const [time, setTime] = useState(0);
@@ -95,9 +96,12 @@ const Map = props => {
                         xCoord={displayX}
                         yCoord={displayY}
                     />
+                    <ChooseCharacter 
+                        characters={characterData}
+                        xCoord={displayX}
+                        yCoord={displayY}
+                    />
                 </div>
-                <p style={{color: "white"}}>{xCoord}</p>
-                <p style={{color: "white"}}>{yCoord}</p>
             </main>
         </>
     )
