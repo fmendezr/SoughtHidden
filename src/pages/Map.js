@@ -20,6 +20,8 @@ const Map = props => {
     const [time, setTime] = useState(0);
     const [xCoord, setXCoord] = useState(0);
     const [yCoord, setYCoord] = useState(0);
+    const [displayX , setDisplayX] = useState(0);
+    const [displayY, setDisplayY] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -27,6 +29,16 @@ const Map = props => {
         }, 1000);
         return () => clearInterval(interval);
     })
+
+    const imageClick = (e) => {
+        updateCrosshair(e);
+        updateCoords(e);
+    }
+
+    const updateCrosshair = (e) => {
+        setDisplayX(e.pageX);
+        setDisplayY(e.pageY);
+    }
 
     const updateCoords = (e) => {
         const container = e.target;
@@ -77,12 +89,15 @@ const Map = props => {
                 />
             </div>
             <main>
-                <div className="gameContainer" onClick={updateCoords}>
+                <div className="gameContainer" onClick={imageClick}>
                     <Image src={map.image}/>
+                    <Crosshair
+                        xCoord={displayX}
+                        yCoord={displayY}
+                    />
                 </div>
-            
-                <p>{xCoord}</p>
-                <p>{yCoord}</p>
+                <p style={{color: "white"}}>{xCoord}</p>
+                <p style={{color: "white"}}>{yCoord}</p>
             </main>
         </>
     )

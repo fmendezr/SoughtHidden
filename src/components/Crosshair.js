@@ -5,7 +5,7 @@ const Crosshair = props => {
     return (
         <Circle 
             xCoord={props.xCoord}
-            yCord={props.yCoord}
+            yCoord={props.yCoord}
         />
     )
 }
@@ -21,7 +21,7 @@ const Circle = styled.div`
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
     position: absolute;
-    transform-origin: center;
-    top: ${props => props.xCoord}%;
-    left: ${props => props.yCord}%;
+    transform:translate(-50%,-50%);
+    top: ${props => props.yCoord}px;
+    left: ${props => props.xCoord}px;
 `
