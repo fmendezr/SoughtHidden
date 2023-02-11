@@ -21,6 +21,8 @@ const Map = props => {
     const [time, setTime] = useState(0);
     const [xCoord, setXCoord] = useState(0);
     const [yCoord, setYCoord] = useState(0);
+
+    const [displayTargeting, setDisplayTasrgeting] = useState(false)
     const [displayX , setDisplayX] = useState(0);
     const [displayY, setDisplayY] = useState(0);
 
@@ -36,9 +38,16 @@ const Map = props => {
         updateCoords(e);
     }
 
+    const changeTargeting = () => {
+        setDisplayTasrgeting((previousState) => {
+            return !previousState;
+        })
+    }
+
     const updateCrosshair = (e) => {
         setDisplayX(e.pageX);
         setDisplayY(e.pageY);
+        changeTargeting();
     }
 
     const updateCoords = (e) => {
@@ -95,11 +104,13 @@ const Map = props => {
                     <Crosshair
                         xCoord={displayX}
                         yCoord={displayY}
+                        display={displayTargeting}
                     />
                     <ChooseCharacter 
                         characters={characterData}
                         xCoord={displayX}
                         yCoord={displayY}
+                        display={displayTargeting}
                     />
                 </div>
             </main>

@@ -19,6 +19,8 @@ const ChooseCharacter = props => {
         y += 70;
     }
 
+    if (!props.display) return null;
+
     return (
         <Container x={x} y={y}>
             {props.characters.map((character) => {

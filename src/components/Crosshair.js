@@ -2,6 +2,8 @@ import styled from "styled-components"
 
 const Crosshair = props => {
 
+    if (!props.display) return null;
+
     return (
         <Circle 
             xCoord={props.xCoord}
