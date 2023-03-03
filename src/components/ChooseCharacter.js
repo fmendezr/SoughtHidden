@@ -24,11 +24,17 @@ const ChooseCharacter = props => {
     return (
         <Container x={x} y={y}>
             {props.characters.map((character) => {
-                return (
-                    <Name key={character.id} id={character.id}>
+                if (props.foundCharacters[character.id] === false){
+                    return (
+                    <Name key={character.id} id={character.id} onClick={(e) => {
+                        e.stopPropagation()
+                        props.handleClick(character.id)
+                        props.disappear()
+                    }}>
                         <p>{character.name}</p>
                     </Name>
                 )
+                }
             })}
         </Container>
     )

@@ -7,6 +7,19 @@ import CharacterDropdown from "../components/CharacterDropdown";
 import Counter from "../components/Counter";
 import Crosshair from "../components/Crosshair";
 import ChooseCharacter from "../components/ChooseCharacter";
+import { db } from "../firebase-config";
+
+import {
+    collection,
+    getDocs, 
+    getDoc, 
+    setDoc,
+    addDoc, 
+    updateDoc,
+    deleteDoc, 
+    doc,
+    query, 
+} from "firebase/firestore"
 
 const Map = props => {
 
@@ -33,6 +46,32 @@ const Map = props => {
         return () => clearInterval(interval);
     })
 
+    async function get_data_from_firebase (mapId, chid) {
+        const dataRef = doc(db, "maps", mapId);
+        const docSnap = await getDoc(dataRef)
+         
+        if (docSnap.exists()) {
+            let x = await ("Document data:", docSnap.data().characters[chid]);
+            return x
+          } else {
+            // doc.data() will be undefined in this case
+            return ("No such document!");
+          }
+    }
+
+    async function verifyThatClickedCorrectLocation(chid) {
+        let data =  await(get_data_from_firebase(id, chid))
+        if ( (Math.abs(data[0] - xCoord)) <= 5 && (Math.abs(data[1] - yCoord)) <= 5){
+           changeFoundCharacter(chid);
+           ChangeCharactersMissing();
+           handleGameOver();
+        }
+    }
+
+    const handleCharacterClick = (chid) => {
+        verifyThatClickedCorrectLocation(chid);
+    }
+
     const imageClick = (e) => {
         updateCrosshair(e);
         updateCoords(e);
@@ -53,18 +92,18 @@ const Map = props => {
     const updateCoords = (e) => {
         const container = e.target;
         let rect  = container.getBoundingClientRect();
-        setXCoord(Math.floor((e.clientX - rect.top) * 100 / container.offsetWidth));
+        setXCoord(Math.floor((e.clientX - rect.left) * 100 / container.offsetWidth));
         setYCoord(Math.floor((e.clientY - rect.top) * 100 / container.offsetWidth));
       
     }
 
-    const reduceCharactersMissing = () => {
+    const ChangeCharactersMissing = () => {
         setCharactersMissing((previousState) => {
-            return previousState - 1;
+           return previousState -= 1
         })
     }
 
-    const changeFoundCharacter = id => {
+    const changeFoundCharacter = (id) => {
         setFoundCharacters((previousState) => {
            return {...previousState, [id]: true}
         });
@@ -108,9 +147,12 @@ const Map = props => {
                     />
                     <ChooseCharacter 
                         characters={characterData}
+                        foundCharacters={foundCharacters}
                         xCoord={displayX}
                         yCoord={displayY}
                         display={displayTargeting}
+                        handleClick={handleCharacterClick}
+                        disappear={changeTargeting}
                     />
                 </div>
             </main>
