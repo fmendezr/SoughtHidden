@@ -152,6 +152,8 @@ const Map = props => {
                     <GameOverPopUp
                         display={gameOver}
                         userTime={finalTime}
+                        characters={characterData}
+                        foundCharacters={foundCharacters}
                     />
                 </div>
             </main>
