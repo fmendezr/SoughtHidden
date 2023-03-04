@@ -3,12 +3,31 @@ import Counter from "./Counter"
 import { Link } from "react-router-dom"
 import homeIcon from "../images/homeIcon.svg";
 import CharacterDropdown from "./CharacterDropdown";
+import { useState } from "react";
 
 const GameOverPopUp = (props) => {
-    if (props.display == false){
+
+    const [userName, setUserName] = useState("")
+
+    if (props.display === false){
         return null
     }
 
+    const updateUserName = (e) => {
+        const {value} = e.target;
+        setUserName(value);
+    }
+
+    const handleSubmition = () => {
+        let string = userName;
+        string = string.replace(/\s/g, "");
+        if (string == ""){
+           window.alert("Can't submit blank");
+            setUserName("");
+        } else {
+        props.uploadData(userName, props.userTime);
+        }
+    }
 
     return <>
         <Background onClick={(e) => {e.stopPropagation()}}>
@@ -31,8 +50,11 @@ const GameOverPopUp = (props) => {
                 />
                 <Form>
                     <label>Enter your Name</label>
-                    <Input/>
-                    <Button onClick={(e) => {e.preventDefault()}}> Enter </Button>
+                    <Input value={userName} onChange={updateUserName}/>
+                    <Button onClick={(e) => {
+                        e.preventDefault();
+                        handleSubmition();
+                        }}> Enter </Button>
                 </Form>
             </Container>
         </Background>

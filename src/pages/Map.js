@@ -19,7 +19,8 @@ import {
     updateDoc,
     deleteDoc, 
     doc,
-    query, 
+    query,
+    arrayUnion, 
 } from "firebase/firestore"
 
 const Map = props => {
@@ -48,7 +49,7 @@ const Map = props => {
         return () => clearInterval(interval);
     })
 
-    async function get_data_from_firebase (mapId, chid) {
+    async function get_coordinates_from_firebase (mapId, chid) {
         const dataRef = doc(db, "maps", mapId);
         const docSnap = await getDoc(dataRef)
          
@@ -60,8 +61,17 @@ const Map = props => {
           }
     }
 
+    async function upload_time_into_firebase (name, time){
+        const mapData = {name: [name], time: [time]};
+        const dataRef = doc(db, "maps", id);
+
+        await updateDoc(dataRef, {
+            leaderboard: arrayUnion(mapData)
+        });
+    }
+
     async function verifyThatClickedCorrectLocation(chid) {
-        let data =  await(get_data_from_firebase(id, chid))
+        let data =  await(get_coordinates_from_firebase(id, chid))
         if ( (Math.abs(data[0] - xCoord)) <= 5 && (Math.abs(data[1] - yCoord)) <= 5){
            changeFoundCharacter(chid);
            ChangeCharactersMissing();
@@ -154,6 +164,7 @@ const Map = props => {
                         userTime={finalTime}
                         characters={characterData}
                         foundCharacters={foundCharacters}
+                        uploadData={upload_time_into_firebase}
                     />
                 </div>
             </main>
