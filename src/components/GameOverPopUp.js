@@ -4,11 +4,13 @@ import { Link } from "react-router-dom"
 import homeIcon from "../images/homeIcon.svg";
 import CharacterDropdown from "./CharacterDropdown";
 import { useState } from "react";
+import Leaderboard from "./Leaderboard";
 
 const GameOverPopUp = (props) => {
 
-    const [userName, setUserName] = useState("")
-
+    const [userName, setUserName] = useState("");
+    const [displayLeaderboard, setDisplayLeaderboard] = useState(false);
+ 
     if (props.display === false){
         return null
     }
@@ -21,12 +23,37 @@ const GameOverPopUp = (props) => {
     const handleSubmition = () => {
         let string = userName;
         string = string.replace(/\s/g, "");
-        if (string == ""){
+        if (string === ""){
            window.alert("Can't submit blank");
             setUserName("");
         } else {
         props.uploadData(userName, props.userTime);
+        setDisplayLeaderboard(true);
         }
+    }
+
+    if (displayLeaderboard === true){
+        return <>
+            <Background onClick={(e) => {e.stopPropagation()}}>
+            <div className="navbar">
+                <Link to="/">
+                    <Logo src={homeIcon}/>
+                </Link>
+                <Counter
+                        time={props.userTime}
+                />
+                <CharacterDropdown 
+                    num={0}
+                    characters={props.characters}
+                    foundCharacters={props.foundCharacters}
+                />
+            </div>
+            <Container>
+                <Counter time={props.userTime}/>
+                <Leaderboard id={props.id}/>
+            </Container>
+        </Background>
+        </>
     }
 
     return <>
@@ -45,9 +72,7 @@ const GameOverPopUp = (props) => {
                 />
             </div>
             <Container>
-                <Counter 
-                    time={props.userTime}
-                />
+                <Counter time={props.userTime}/>
                 <Form>
                     <label>Enter your Name</label>
                     <Input value={userName} onChange={updateUserName}/>
@@ -60,6 +85,8 @@ const GameOverPopUp = (props) => {
         </Background>
     </>
 }
+
+export default GameOverPopUp;
 
 const Background = styled.div`
     position: fixed;
@@ -147,9 +174,3 @@ const Logo = styled.img`
     filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(66deg) brightness(97%) contrast(110%);
 `
 
-const Image = styled.img`
-    width: 100%
-`
-
-
-export default GameOverPopUp;

@@ -11,15 +11,9 @@ import GameOverPopUp from "../components/GameOverPopUp";
 import { db } from "../firebase-config";
 
 import {
-    collection,
-    getDocs, 
     getDoc, 
-    setDoc,
-    addDoc, 
     updateDoc,
-    deleteDoc, 
     doc,
-    query,
     arrayUnion, 
 } from "firebase/firestore"
 
@@ -62,12 +56,24 @@ const Map = props => {
     }
 
     async function upload_time_into_firebase (name, time){
-        const mapData = {name: [name], time: [time]};
+        const mapData = {name: name, time: time};
         const dataRef = doc(db, "maps", id);
 
         await updateDoc(dataRef, {
             leaderboard: arrayUnion(mapData)
         });
+    }
+
+    async function get_leaderboard_from_firebase () {
+          const dataRef = doc(db, "maps", id);
+          const docSnap = await getDoc(dataRef);
+
+          if (docSnap.exists()){
+            let x = await("Document data:", docSnap.data().leaderboard)
+            return x;
+          } else {
+            return("no such document!")
+          }
     }
 
     async function verifyThatClickedCorrectLocation(chid) {
@@ -79,6 +85,18 @@ const Map = props => {
         }
     }
 
+    async function filterLeaderboard () {
+        let data = await get_leaderboard_from_firebase();
+        let sortedLeaderboard = data.sort(
+            (a, b) => (a.time < b.time) ? -1 : (a.time > b.time) ? 1: 0);
+        return sortedLeaderboard.length > 10 ? sortedLeaderboard.slice(0,10) : sortedLeaderboard;
+    }
+
+    const getLeaderboardData = () => {
+        let leaderboard =  filterLeaderboard()
+        return leaderboard
+    }
+
     const handleCharacterClick = (chid) => {
         verifyThatClickedCorrectLocation(chid);
     }
@@ -86,6 +104,7 @@ const Map = props => {
     const imageClick = (e) => {
         updateCrosshair(e);
         updateCoords(e);
+        console.log(getLeaderboardData())
     }
 
     const changeTargeting = () => {
@@ -121,7 +140,7 @@ const Map = props => {
     };
 
     const handleGameOver = () => {
-        if (charactersMissing == 1){
+        if (charactersMissing === 1){
             setGameOver(true)
             setFinalTime(time)
         }
@@ -165,6 +184,8 @@ const Map = props => {
                         characters={characterData}
                         foundCharacters={foundCharacters}
                         uploadData={upload_time_into_firebase}
+                        getLeaderboard={getLeaderboardData}
+                        id={id}
                     />
                 </div>
             </main>
