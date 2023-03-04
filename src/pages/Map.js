@@ -7,6 +7,7 @@ import CharacterDropdown from "../components/CharacterDropdown";
 import Counter from "../components/Counter";
 import Crosshair from "../components/Crosshair";
 import ChooseCharacter from "../components/ChooseCharacter";
+import GameOverPopUp from "../components/GameOverPopUp";
 import { db } from "../firebase-config";
 
 import {
@@ -30,8 +31,9 @@ const Map = props => {
     
     const [foundCharacters, setFoundCharacters] = useState({0: false, 1: false, 2: false});
     const [charactersMissing, setCharactersMissing] = useState(3);
-    const [gameOver, setGameOver] = useState(false)
+    const [gameOver, setGameOver] = useState(false);
     const [time, setTime] = useState(0);
+    const [finalTime, setFinalTime] = useState(0);
     const [xCoord, setXCoord] = useState(0);
     const [yCoord, setYCoord] = useState(0);
 
@@ -54,7 +56,6 @@ const Map = props => {
             let x = await ("Document data:", docSnap.data().characters[chid]);
             return x
           } else {
-            // doc.data() will be undefined in this case
             return ("No such document!");
           }
     }
@@ -109,17 +110,11 @@ const Map = props => {
         });
     };
 
-    const checkGameOver = () => {
-        for (const x in foundCharacters){
-            if (foundCharacters[x] === false) return false;
-        }
-        return true;
-    };
-
     const handleGameOver = () => {
-        if (checkGameOver){
-            setGameOver(true);
-        } 
+        if (charactersMissing == 1){
+            setGameOver(true)
+            setFinalTime(time)
+        }
     };
 
     return (
@@ -153,6 +148,10 @@ const Map = props => {
                         display={displayTargeting}
                         handleClick={handleCharacterClick}
                         disappear={changeTargeting}
+                    />
+                    <GameOverPopUp
+                        display={gameOver}
+                        userTime={finalTime}
                     />
                 </div>
             </main>
