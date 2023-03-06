@@ -1,5 +1,9 @@
 SOUGHT OF HIDDEN
 
+Can acces live version at: 
+    -star-tagging.web.app 
+    -star-tagging.firebaseapp.com
+
 Its a photo tagging app. in othe words, it like Where's Waldo.
 There is a large image with bunch of characters and distractions in general, the goal is tot find three specific characters in the image. Who this characters are can be seen when clicking the bubble counter in the navbar. There are three diferent maps with three unique characters. the source of these images can be found below:
 
