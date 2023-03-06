@@ -34,7 +34,8 @@ html{
     justify-content: center;
     align-items: center;
     background: rgb(62, 0, 21);
-    padding: 10rem 0;
+    padding: 9rem 0;
+    padding-bottom: 3.5rem;
 }
 
 .gridContainer { 

@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, setDoc, getDoc, doc } from "firebase/firestore"
+import { getFirestore } from "firebase/firestore"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,20 +20,3 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
-
-//async function uploadData () {
-//    const mapsRef = collection(db, "maps");
-//
-//    await setDoc(doc(mapsRef, "hell&Heaven"), {
-//        characters: {0: [2, 126], 1: [52, 65], 2: [91, 43]},
-//        leaderboard: [],
-//    });
-//    await setDoc(doc(mapsRef, "whiteNoise"), {
-//        charactetrs: {0: [56, 5], 1: [19, 65], 2: [91,43]},
-//        leaderboard: []
-//    });
-//    await setDoc(doc(mapsRef, "supes"), {
-//        characters: {0: [17, 30], 1: [78, 13], 2: [65, 138]},
-//        leaderboard: []
-//    })
-//}

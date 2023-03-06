@@ -1,5 +1,6 @@
 import maps from "../maps";
 import MapPreview from "../components/MapPreview";
+import Footer from "../components/Footer";
 
 const Home = () => {
     return (
@@ -21,6 +22,7 @@ const Home = () => {
                   })}
                 </div>
             </main>
+            <Footer/>
         </>
     )
 }

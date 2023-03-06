@@ -8,6 +8,7 @@ import Counter from "../components/Counter";
 import Crosshair from "../components/Crosshair";
 import ChooseCharacter from "../components/ChooseCharacter";
 import GameOverPopUp from "../components/GameOverPopUp";
+import Footer from "../components/Footer";
 import { db } from "../firebase-config";
 
 import {
@@ -189,6 +190,7 @@ const Map = props => {
                     />
                 </div>
             </main>
+            <Footer/>
         </>
     )
 }
