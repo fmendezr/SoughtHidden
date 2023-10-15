@@ -1,7 +1,6 @@
 # SOUGHT OF HIDDEN
 
-Its a photo tagging app. in othe words, it like Where's Waldo.
-There is a large image with bunch of characters and distractions in general, the goal is tot find three specific characters in the image. Who this characters are can be seen when clicking the bubble counter in the navbar. There are three diferent maps with three unique characters.
+ A photo tagging app. in othe words, it like Where's Waldo. There is a large image with bunch of characters and distractions in general, the goal is tot find three specific characters in the image. Who this characters are can be seen when clicking the bubble counter in the navbar. There are three diferent maps with three unique characters.
 
 <h2>Live Versions </h2>
     <ul>
